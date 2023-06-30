@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>컴파일러 소개</title>
+        <style>
+            body{
+                background : black;
+            }
+            .title{
+                color:white;
+                font-family:'Neo둥근모 Pro';
+                text-align: center;
+                font-size: 2.3em;
+            }
+            p{
+                text-align: center;
+                color:white;
+                opacity: 0;
+                transition-duration: 0.7s;
+
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="title">IT is Compiler,</h1>
+        <h2 class="title">it is Compiler.</h2>
+        
+        <p>
+            코드 전체를 다른 언어로<br>
+            번역하는 소프트웨어<br>
+            "부원 모두가 컴파일러가 되어<br>
+            각자의 분야에서 자신만의 언어로<br>
+            창작물을 만들어 성취하다"<br>
+        </p>
+
+        <script>
+        let observer = new IntersectionObserver((e)=>{ //화면에 나타나는지 감시
+            e.forEach((box)=>{
+                if(box.isIntersecting){
+                    box.target.style.opacity =1;
+                }
+            })
+        })
+
+        let p = document.querySelectorAll('p') //p태그가져옴
+        observer.observe(p[0]) //인덱스로 첫번째p
+       
+        </script>
+    </body>
+</html>

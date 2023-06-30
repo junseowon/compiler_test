@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>별빛</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            background-color: black;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="nightSky" width="1280" height="475"></canvas>
+
+    <script>
+        // 캔버스 요소 가져오기
+        var canvas = document.getElementById("nightSky");
+        var ctx = canvas.getContext("2d");
+
+        // 별들의 배열
+        var stars = [];
+
+        // 별 객체 생성 함수
+        function Star(x, y, radius, speed) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.speed = speed;
+
+            // 별 그리기 함수
+            this.draw = function() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = "white";
+                ctx.fill();
+            }
+
+            // 별 이동 함수
+            this.update = function() {
+                this.x -= this.speed;
+                if (this.x < -this.radius) {
+                    this.x = canvas.width + this.radius;
+                    this.y = Math.random() * canvas.height;
+                }
+                this.draw();
+            }
+        }
+
+        // 초기화 함수
+        function init() {
+            // 별들 생성
+            for (var i = 0; i < 100; i++) {
+                var x = Math.random() * canvas.width;
+                var y = Math.random() * canvas.height;
+                var radius = Math.random() * 3;
+                var speed = Math.random() * 2 + 1;
+                stars.push(new Star(x, y, radius, speed));
+            }
+
+            // 애니메이션 시작
+            animate();
+        }
+
+        // 애니메이션 함수
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // 캔버스 지우기
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 모든 별들 이동
+            for (var i = 0; i < stars.length; i++) {
+                stars[i].update();
+            }
+        }
+
+        // 초기화 함수 호출
+        init();
+    </script>
+</body>
+</html>
